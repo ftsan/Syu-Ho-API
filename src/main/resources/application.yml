@@ -11,4 +11,18 @@ spring:
   
 doma:
   dialect: MYSQL
+
+---
+server:
+  port: 8081
+spring:
+  profiles: heroku
+  datasource:
+    url: jdbc:mysql://127.0.0.1/syuho
+    schema: syuho
+    username: syuho
+    password: pass_1234
+    driver-class-name: org.postgresql.Driver
   
+doma:
+  dialect: postgres

@@ -2,4 +2,5 @@ select
     *
 from
     syuho
-order by week desc;
+order by year, month, week desc
+;
