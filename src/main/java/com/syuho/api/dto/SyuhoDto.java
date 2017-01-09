@@ -13,5 +13,5 @@ public class SyuhoDto implements Serializable {
     private static final long serialVersionUID = -3525122874000099030L;
     
     final private Week week;
-    final private List<SyuhoItemDto> item;
+    final private List<SyuhoItemDto> items;
 }
