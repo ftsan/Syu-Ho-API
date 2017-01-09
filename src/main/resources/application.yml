@@ -8,7 +8,7 @@ spring:
     username: syuho
     password: pass_1234
     driver-class-name: com.mysql.jdbc.Driver
-
+  
 doma:
   dialect: MYSQL
   

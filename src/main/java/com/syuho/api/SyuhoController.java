@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.syuho.api.dto.ApiResponse;
 import com.syuho.api.dto.SyuhoDto;
 import com.syuho.api.dto.SyuhoItemDto;
+import com.syuho.api.dto.Week;
 import com.syuho.domain.model.syuho.Syuho;
 import com.syuho.service.SyuhoService;
 import com.syuho.service.UserService;
@@ -36,19 +37,21 @@ public class SyuhoController {
     @GetMapping("")
     public ResponseEntity<ApiResponse<List<SyuhoDto>>> getAll() {
         List<Syuho> syuhoList = syuhoService.findAll();
+        syuhoList.stream().map(Syuho::toString).forEach(System.out::println);
         List<SyuhoDto> dtoList = parse(syuhoList);
         return new ResponseEntity<ApiResponse<List<SyuhoDto>>>(new ApiResponse<>(dtoList), HttpStatus.OK);
     }
 
     private List<SyuhoDto> parse(List<Syuho> syuho) {
-        Map<String, List<SyuhoItemDto>> collect = syuho.stream()
-                .map(s -> Pair.of(s.getWeek().toString(), 
-                        new SyuhoItemDto(s.getBody(),
+        Map<com.syuho.domain.model.syuho.Week, List<SyuhoItemDto>> collect = syuho.stream()
+                .map(s -> Pair.of(s.getWeek(), 
+                        new SyuhoItemDto(
+                                s.getSyuhoId(),
+                                s.getBody(),
                                 userService.findById(s.getUserId()).get().getUserName())))
                 .collect(groupingBy(Pair::getFirst, mapping(Pair::getSecond, toList())));
-
         return collect.entrySet().stream()
-                .map(e -> new SyuhoDto(e.getKey(), e.getValue()))
+                .map(e -> new SyuhoDto(Week.parse(e.getKey()), e.getValue()))
                 .collect(toList());
     }
 }

@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SyuHoApiApplication {
+public class SyuhoApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SyuHoApiApplication.class, args);
+        SpringApplication.run(SyuhoApiApplication.class, args);
     }
 }

@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import org.seasar.doma.Embeddable;
 
+import lombok.Data;
+
+@Data
 @Embeddable
 public class Week implements Serializable {
 
@@ -17,15 +20,5 @@ public class Week implements Serializable {
         this.year = year;
         this.month = month;
         this.week = week;
-    }
-
-    /**
-     * フォーマット: yyyyMMW
-     * 例: 2017年1月１周目
-     * 2017011
-     */
-    @Override
-    public String toString() {
-        return year.toString() + month.toString() + week.toString();
     }
 }
