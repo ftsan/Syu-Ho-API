@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.syuho.api.dto.ApiResponse;
 import com.syuho.api.dto.SyuhoDto;
 import com.syuho.api.dto.SyuhoItemDto;
+import com.syuho.api.dto.User;
 import com.syuho.api.dto.Week;
 import com.syuho.domain.model.syuho.Syuho;
 import com.syuho.service.SyuhoService;
@@ -48,7 +49,7 @@ public class SyuhoController {
                         new SyuhoItemDto(
                                 s.getSyuhoId(),
                                 s.getBody(),
-                                userService.findById(s.getUserId()).get().getUserName())))
+                                User.parse(userService.findById(s.getUserId()).get()))))
                 .collect(groupingBy(Pair::getFirst, mapping(Pair::getSecond, toList())));
         return collect.entrySet().stream()
                 .map(e -> new SyuhoDto(Week.parse(e.getKey()), e.getValue()))
