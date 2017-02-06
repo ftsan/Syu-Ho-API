@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.codahale.metrics.annotation.Timed;
 import com.syuho.api.dto.ApiResponse;
 import com.syuho.api.dto.SyuhoDto;
 import com.syuho.api.dto.SyuhoItemDto;
@@ -36,6 +37,7 @@ public class SyuhoController {
     private final UserService userService;
 
     @GetMapping("")
+    @Timed
     public ResponseEntity<ApiResponse<List<SyuhoDto>>> getAll() {
         List<Syuho> syuhoList = syuhoService.findAll();
         syuhoList.stream().map(Syuho::toString).forEach(System.out::println);
